@@ -1,43 +1,40 @@
+import { NavLink } from 'react-router-dom'
+
 import {
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card'
+import { FetchGithubIssuesResponse } from '@/lib/api/request/fetch-github-issues'
+import { DateUtils } from '@/lib/dayjs'
 
-export function HomeCard() {
+interface HomeCardProps {
+  data: FetchGithubIssuesResponse
+}
+
+export function HomeCard({ data }: HomeCardProps) {
   return (
-    <CardContent className="bg-c-base-post p-[2rem] rounded-[10px] space-y-[1.25rem] h-[298px] box-sizing">
-      <CardHeader>
-        <CardTitle className="flex justify-between gap-2">
-          <span>
-            <h1 className="font-bold text-c-base-title text-xl">
-              JavaScript data types and data structures
-            </h1>
-          </span>
-
-          <span className="min-w-[60px] text-right">
-            <time className="text-c-base-span text-[0.875rem] w-min[85px]">
-              Há 1 dia
-            </time>
-          </span>
-        </CardTitle>
-      </CardHeader>
-      <CardDescription>
-        <p className="text-base text-c-base-text ">
-          Programming languages all have built-in data structures, but these
-          often differ from one language to another. This article attempts to
-          list the built-in data structures available in JavaScript and what
-          properties they have. These can be used to build other data
-          structures. Wherever possible, comparisons with other languages are
-          drawn. Programming languages all have built-in data structures, but
-          these often differ from one language to another. This article attempts
-          to list the built-in data structures available in JavaScript and what
-          properties they have. These can be used to build other data
-          structures. Wherever possible, comparisons with other languages are
-          drawn.
-        </p>
-      </CardDescription>
-    </CardContent>
-  );
+    <NavLink to={`/post-details/${data.number}`}>
+      <CardContent className="border-sizing box-border h-[298px] space-y-[1.25rem] overflow-hidden text-ellipsis rounded-[10px] bg-c-base-post p-[2rem] ">
+        <CardHeader>
+          <CardTitle className="flex items-start justify-between gap-2">
+            <span>
+              <h1 className="line-clamp-2 text-xl font-bold text-c-base-title">
+                {data.title}
+              </h1>
+            </span>
+            <span>
+              <time className="flex-nowrap whitespace-nowrap text-nowrap text-right text-[0.875rem] text-c-base-span">
+                {DateUtils.fromNow(data.created_at)}
+              </time>
+            </span>
+          </CardTitle>
+        </CardHeader>
+        <CardDescription className="line-clamp-6 overflow-hidden text-ellipsis text-base text-c-base-text">
+          {data.body}
+        </CardDescription>
+      </CardContent>
+    </NavLink>
+  )
 }

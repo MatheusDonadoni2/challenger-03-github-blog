@@ -1,16 +1,22 @@
-import { createBrowserRouter } from "react-router-dom";
-import { Home } from "./home/home";
-import { HeaderLayout } from "./_layouts/headerLayout";
+import { createBrowserRouter } from 'react-router-dom'
+
+import { HeaderLayout } from './_layouts/headerLayout'
+import { Home } from './home/home'
+import { PostDetail } from './post-details/post-details'
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <HeaderLayout />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Home />,
+      },
+      {
+        path: '/post-details/:number',
+        element: <PostDetail />,
       },
     ],
   },
-]);
+])

@@ -1,16 +1,28 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom'
+
+import cover from '../../assets/Cover.jpg'
+import logo from '../../assets/Logo.svg'
 
 export function HeaderLayout() {
   return (
     <div className="antialiased">
-      <div className="w-full h-[18.5rem] bg-red-500 flex justify-center items-center">
-        GITHUB BLOG
+      <div className=" bg-red-50">
+        <img
+          src={cover}
+          alt=""
+          className="flex h-[18.5rem] w-full object-fill  "
+        />
+        <img
+          src={logo}
+          alt=""
+          className="absolute left-[calc(((100vw)/2)-(9.25rem/2))] top-[calc((18.5rem-6.125rem)/2)]"
+        />
       </div>
 
-      <div className="max-w-[54rem] mx-auto px-6 mt-[-5.5rem] ">
+      <div className="mx-auto mt-[-5.5rem] max-w-[54rem] px-6 ">
         <Outlet />
         <div></div>
       </div>
     </div>
-  );
+  )
 }
